@@ -12,6 +12,9 @@ Chat features:
 
 Rolling and chat system are networked.
 
+To perform roll, press R key
+To open chat, press T key. Chat can be closed via Esc key (when input box focused/unfocused), and via T key (when input box unfocused)
+
 
 
 
