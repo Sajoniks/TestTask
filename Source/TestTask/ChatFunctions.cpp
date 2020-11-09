@@ -23,6 +23,9 @@ static TArray<FString> BadWords = {
  */
 FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 {
+	//Regex doesn't work
+	//PHP matcher works fine
+	
 	//Beginning of the pattern
 	FString Pattern = "(?i)\b(";
 	
@@ -36,7 +39,7 @@ FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 	Pattern.Append(")\b");
 
 	FRegexPattern RegexPattern(Pattern);
-	FRegexMatcher Matcher(RegexPattern, InText.ToString());
+	FRegexMatcher Matcher(RegexPattern, InText.ToString()); //No matches there
 
 	return FText::FromString("");
 }
