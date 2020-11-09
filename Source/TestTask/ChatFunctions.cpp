@@ -47,11 +47,11 @@ FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 	return FText::FromString("");
 }
 
-FText UChatFunctions::ProcessLinks(const FText& InText)
+FString UChatFunctions::ProcessLinks(const FString& InText)
 {
-	if (!InText.ShouldGatherForLocalization())
+	if (!InText.IsEmpty())
 	{
-		FString Message = InText.ToString();
+		FString Message = InText;
 
 		FRegexPattern Pattern(TEXT(R"((?:http[s]?:\/\/)?www\.[a-z]+\.[a-z]+)"));
 		FRegexMatcher Matcher(Pattern, Message);
@@ -69,8 +69,8 @@ FText UChatFunctions::ProcessLinks(const FText& InText)
 			Message.InsertAt(End+6*MatchCount + 3*(MatchCount-1), R"(</>)");
 		}
 
-		return FText::FromString(Message);
+		return Message;
 	}
 
-	return FText::FromString("");
+	return InText;
 }

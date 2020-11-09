@@ -18,5 +18,5 @@ class TESTTASK_API UChatFunctions : public UBlueprintFunctionLibrary
 	static FText BasicProfanityFilter(const FText& InText);
 
 	UFUNCTION(BlueprintCallable, Category = "Chat")
-	static FText ProcessLinks(const FText& InText);
+	static FString ProcessLinks(const FString& InText);
 };
