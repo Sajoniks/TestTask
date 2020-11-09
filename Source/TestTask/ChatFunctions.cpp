@@ -6,11 +6,11 @@
 //Array of bad words
 //Can be updated from server, if needed
 static TArray<FString> BadWords = {
-	"gay"
-	"shit"
-	"suck"
-	"dick"
-	"asshole"
+	"gay",
+	"shit",
+	"suck",
+	"dick",
+	"asshole",
 };
 
 /**
@@ -20,14 +20,14 @@ static TArray<FString> BadWords = {
  * @param InText Text to check
  * @out Sanitized text
  */
-FText UChatFunctions::BasicProfanityFilter(const FText& InText)
+FString UChatFunctions::BasicProfanityFilter(const FString& InText)
 {
-	if (!InText.ShouldGatherForLocalization())
-	{//Regex doesn't work
-	//PHP matcher works fine
-
+	if (!InText.IsEmpty())
+	{
 	//Beginning of the pattern
-		FString Pattern = "(?i)\b(";
+		FString Pattern = TEXT(R"((?i)\b()");
+
+		FString Message = InText;
 
 		for (auto&& w : BadWords)
 		{
@@ -36,15 +36,29 @@ FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 
 		//Remove unnecessary '|'
 		Pattern = Pattern.LeftChop(1);
-		Pattern.Append(")\b");
+		Pattern.Append(R"()\b)");
 
 		FRegexPattern RegexPattern(Pattern);
-		FRegexMatcher Matcher(RegexPattern, InText.ToString()); //No matches there
+		FRegexMatcher Matcher(RegexPattern, Message);
 
-		return FText::FromString("");
+		int32 Offset = 0;
+
+		while(Matcher.FindNext())
+		{
+			int32 Begin = Matcher.GetMatchBeginning()-Offset;
+			int32 End = Matcher.GetMatchEnding() - Offset;
+			int32 Len = End - Begin;
+			Message.RemoveAt(Begin, Len);
+
+			Message.InsertAt(Begin, "***");
+			Offset += Len - 3;
+		}
+
+		return Message;
+		
 	}
 
-	return FText::FromString("");
+	return InText;
 }
 
 FString UChatFunctions::ProcessLinks(const FString& InText)
