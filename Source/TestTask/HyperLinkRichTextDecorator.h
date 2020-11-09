@@ -36,7 +36,7 @@ class TESTTASK_API UHyperLinkRichTextDecorator : public URichTextBlockDecorator
 public:
 
 	UHyperLinkRichTextDecorator(const FObjectInitializer& ObjectInitializer):
-		URichTextBlockDecorator(ObjectInitializer) {}
+	URichTextBlockDecorator(ObjectInitializer) {}
 	
 	TSharedPtr<ITextDecorator> CreateDecorator(URichTextBlock* InOwner) override;
 
