@@ -6,14 +6,14 @@
 //Array of bad words
 //Can be updated from server, if needed
 static TArray<FString> BadWords = {
-	"gay"
-	"shit"
-	"suck"
-	"dick"
-	"asshole"
+	"gay",
+	"shit",
+	"suck",
+	"dick",
+	"asshole",
 };
 
-/**
+/** 
  * Simple profanity filter
  * Works only on words from the array above
  * Does not work with plurals
@@ -23,6 +23,10 @@ static TArray<FString> BadWords = {
  */
 FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 {
+	//Regex doesn't match, I don't know why
+	//PHP matches fine
+
+	
 	//Beginning of the pattern
 	FString Pattern = "(?i)\b(";
 	
@@ -35,8 +39,10 @@ FText UChatFunctions::BasicProfanityFilter(const FText& InText)
 	Pattern = Pattern.LeftChop(1);
 	Pattern.Append(")\b");
 
+	FString Message = InText.ToString();
+	
 	FRegexPattern RegexPattern(Pattern);
-	FRegexMatcher Matcher(RegexPattern, InText.ToString());
+	FRegexMatcher Matcher(RegexPattern, Message);
 
 	return FText::FromString("");
 }
