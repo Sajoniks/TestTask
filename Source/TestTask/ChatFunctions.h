@@ -6,14 +6,14 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ChatFunctions.generated.h"
 
-/**
+/** Functions for chat messages formatting
  * 
  */
 UCLASS()
 class TESTTASK_API UChatFunctions : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-
+	
 	UFUNCTION(BlueprintCallable, Category="Chat")
 	static FString BasicProfanityFilter(const FString& InText);
 
