@@ -7,11 +7,11 @@
 #include "Widgets/Input/SRichTextHyperlink.h"
 
 FRichInlineHyperLinkDecorator::FRichInlineHyperLinkDecorator(URichTextBlock* InOwner,
-                                                             UHyperLinkRichTextDecorator* Decorator):
-FRichTextDecorator(InOwner)
+	UHyperLinkRichTextDecorator* Decorator) :
+	FRichTextDecorator(InOwner)
 {
 	Style = Decorator->Style;
-	Delegate.BindLambda([&]()
+	Delegate.BindLambda([=]()
 	{
 		Decorator->OnClick(StringLink);
 	});
