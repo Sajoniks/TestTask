@@ -44,6 +44,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Appearence")
 		FHyperlinkStyle Style;
 
+	//Bluerpint function that called then link is clicked
 	UFUNCTION(BlueprintImplementableEvent, Category="Action")
 		void OnClick(const FString& Link);
 
